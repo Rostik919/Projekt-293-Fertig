@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kontakt – Rostyslav Kulynych">
+  <title>Kontakt – MyPortfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="page-wrap">
+    <main>
+      <section class="kontakt-wrap">
+        <div class="kontakt-left">
+          <h2>Kont<span class="accent">akten</span></h2>
+          <p>Bei offenen Fragen können Sie mir direkt eine E-Mail schicken</p>
+        </div>
+
+        <div class="k-form">
+          <div class="k-row">
+            <div>
+              <label for="k-name" class="hidden-label">Nachname</label>
+              <input type="text" id="k-name" class="k-input" placeholder="Name" autocomplete="family-name">
+            </div>
+            <div>
+              <label for="k-vorname" class="hidden-label">Vorname</label>
+              <input type="text" id="k-vorname" class="k-input" placeholder="Vorname" autocomplete="given-name">
+            </div>
+          </div>
+          <div class="k-field">
+            <label for="k-email" class="hidden-label">E-Mail</label>
+            <input type="email" id="k-email" class="k-input" placeholder="E-Mail" autocomplete="email">
+          </div>
+          <div class="k-field">
+            <label for="k-msg" class="hidden-label">Nachricht</label>
+            <textarea id="k-msg" class="k-textarea" placeholder="Nachricht..."></textarea>
+          </div>
+          <button class="k-submit" onclick="sendKontakt()">Schicken</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    function sendKontakt() {
+      const name    = document.getElementById('k-name').value.trim();
+      const vorname = document.getElementById('k-vorname').value.trim();
+      const email   = document.getElementById('k-email').value.trim();
+      const msg     = document.getElementById('k-msg').value.trim();
+
+      if (!name || !vorname || !email || !msg) {
+        alert('Bitte alle Felder ausfüllen.');
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Bitte eine gültige E-Mail-Adresse eingeben.');
+        return;
+      }
+
+      const subject = encodeURIComponent('Nachricht von ' + vorname + ' ' + name);
+      const body    = encodeURIComponent(msg + '\n\nVon: ' + vorname + ' ' + name + '\nE-Mail: ' + email);
+      window.location.href = 'mailto:kylrost@gmail.com?subject=' + subject + '&body=' + body;
+    }
+  </script>
+</body>
+</html>
